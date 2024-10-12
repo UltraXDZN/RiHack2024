@@ -28,8 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = not os.getenv("PRODUCTION_STATUS") * -1
-VUE_PROD = os.getenv("PRODUCTION_STATUS")
+DEBUG = True
+VUE_PROD = False
+
+print(f"DEBUG: {DEBUG}")
 
 
 ALLOWED_HOSTS = []
@@ -49,10 +51,9 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
-CSRF_TRUSTED_ORIGINS = ['http://localhost:5173']
-CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SECURE = True
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS = ['http://localhost:5173', "http://localhost:8000", "http://127.0.0.1:8000"]
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
