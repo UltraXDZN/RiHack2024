@@ -19,7 +19,6 @@ from django.urls import path, include
 
 from django.conf import settings
 
-from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -29,7 +28,9 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('news/', views.news_view, name='news'),
 
-    path('', include('sim.urls')) # API calls
+    # API calls
+    path('', include('news.urls')),
+    path('', include('sim.urls'))
 ]
 
 if settings.DEBUG:

@@ -1,15 +1,46 @@
+<template>
+  <div>
+    <div v-for="news in newsList" :key="news.id">
+      <NewsCard
+        :title="news.title"
+        :description="news.description"
+        :author="news.author"
+        :date="news.date"
+      />
+    </div>
+  </div>
+</template>
+
 <script>
 import NewsCard from "@/components/NewsComponents/NewsCard.vue";
-import {useAuthStore} from "@/store/auth.js";
 
 export default {
   name: "News",
-  components: {NewsCard},
-}
+  components: { NewsCard },
+  data() {
+    return {
+      newsList: [], // Array of news articles
+    };
+  },
+  created() {
+    this.loadNews();
+  },
+  methods: {
+    async loadNews() {
+      try {
+        const response = await fetch('/api/news/');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        console.log("data.news", data.news);
+        this.newsList = data.news; // Make sure the API response includes the necessary fields
+        console.log("this.newsList", this.newsList)
+      } catch (error) {
+        console.error('Error loading news:', error);
+      }
+    },
+  },
+};
 </script>
-
-<template>
-  <NewsCard />
-</template>
-
-

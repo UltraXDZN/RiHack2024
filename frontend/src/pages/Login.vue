@@ -28,7 +28,8 @@
               Don’t have an account yet?
               <a href="/register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register here</a>
             </p>
-            <p v-if="error" class="accent-red-500">{{ error }}</p>
+            <p v-if="error" class="text-red-500">{{ error }}</p>
+            <p v-if="success" class="text-green-500">{{ success }}</p>
           </form>
         </div>
       </div>
@@ -48,16 +49,24 @@ export default {
     return {
       email: "",
       password: "",
-      error: ""
+      error: "",
+      success: ""
     };
   },
   methods: {
     async login() {
       try {
-        await this.authStore.login(this.email, this.password); // Access authStore directly
+        const result = await this.authStore.login(this.email, this.password);
+        this.success = "Login successful. Redirecting...";
+
+        // Redirect to login page after success
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1500);
       } catch (error) {
-        this.error = 'Login failed. Please check your credentials.';
-        console.error(error);
+        this.error = "Login failed. Please check your credentials.";
+        this.success = ''; // Clear success message on error
+        throw error;
       }
     },
     resetError() {
