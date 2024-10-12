@@ -1,11 +1,14 @@
 <template>
   <div>
-    <div v-for="news in newsList" :key="news.id">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <NewsCard
-        :title="news.title"
-        :description="news.description"
-        :author="news.author"
-        :date="news.date"
+          v-for="news in newsList"
+          :key="news.id"
+          :title="news.title"
+          :image="'/media/' + news.banner"
+          :description="news.description"
+          :author="news.author__username"
+          :date="news.created_at"
       />
     </div>
   </div>
@@ -16,7 +19,7 @@ import NewsCard from "@/components/NewsComponents/NewsCard.vue";
 
 export default {
   name: "News",
-  components: { NewsCard },
+  components: {NewsCard},
   data() {
     return {
       newsList: [], // Array of news articles

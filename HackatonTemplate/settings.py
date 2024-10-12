@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -144,7 +145,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'local-cdn' / 'static'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR.parent / "local-cdn" / "media"
+MEDIA_ROOT = BASE_DIR / "local-cdn" / "media"
 print(MEDIA_ROOT)
 
 # Default primary key field type
