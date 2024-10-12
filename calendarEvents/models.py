@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
@@ -17,10 +16,15 @@ class Event(models.Model):
 
     @property
     def is_past(self):
-        return self.end_time < timezone.now()
+        if self.end_time:
+            return self.end_time < timezone.now()
+        else:
+            return False  # Or adjust based on your logic
 
     @property
     def duration(self):
-        if self.end_time is None:
+        if self.end_time:
+            duration = self.end_time - self.start_time
+            return str(duration)
+        else:
             return "Unknown"
-        return f"{self.end_time - self.start_time}"
