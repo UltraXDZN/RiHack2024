@@ -2,16 +2,20 @@ from django.shortcuts import render
 
 
 def home_view(request):
-    return render(request, 'home.html')
+    return render(request, "home.html")
 
 
 def news_view(request):
-    return render(request, 'news.html')
+    return render(request, "news.html")
 
 
 def login_view(request):
-    return render(request, 'login.html')
+    return render(request, "login.html")
 
 
 def register_view(request):
-    return render(request, 'register.html')
+    return render(request, "register.html")
+
+
+def citySelection_view(request):
+    return render(request, "citySelection.html")
