@@ -1,8 +1,11 @@
 <script setup>
 import Home from '@/pages/Home.vue'
-console.log('Home')
+import NavBar from "@/components/NavBar.vue";
 </script>
 
 <template>
+  <div>
+    <NavBar/>
     <Home/>
+  </div>
 </template>

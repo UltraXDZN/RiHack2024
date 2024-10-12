@@ -13,6 +13,6 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, '../static/dev'),  // Resolving to ../static/dev properly
     emptyOutDir: true,  // Ensures the output directory is cleared before each build
-    sourcemap: true
+    sourcemap: true,
   }
 })
