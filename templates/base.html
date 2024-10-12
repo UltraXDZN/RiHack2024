@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% for file in vue_css_files %}
+        <link rel="stylesheet" href="{% static file %}"/>
+        {% endfor %}
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+        {% csrf_token %}
+        {% for file in vue_js_files %}
+        <script src="{% static file %}"></script>
+        {% endfor %}
+    </body>
+</html>

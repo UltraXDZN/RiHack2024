@@ -1,0 +1,22 @@
+.venv
+/HackatonTemplate/.env
+__pycache__/
+*.pyc
+*.sqlite3
+static/
+/media/
+/local-cdn/
+
+
+# Vue.js
+.DS_Store
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE - PyCharm
+.idea/
+*.iml
+
+#VSCode
+.vscode/
