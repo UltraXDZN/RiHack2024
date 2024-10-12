@@ -15,41 +15,31 @@ export const useAuthStore = defineStore('auth', {
       try {
         await fetch('http://localhost:8000/api/set-csrf-token/', {
           method: 'GET',
+          mode: 'cors',
           credentials: 'include',
         });
       } catch (error) {
         console.error('Failed to set CSRF token', error);
       }
+      console.log("CSRF Token: ", getCSRFToken());
     },
 
     async login(email, password) {
       try {
         await this.setCsrfToken();
-        const response = await fetch('http://localhost:8000/api/login/', {
+        const csrfToken = getCSRFToken();
+        console.log("CSRF Token: ", csrfToken); // This will log the CSRF token to the console
+        const response = await fetch('/api/login/', {
           method: 'POST',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCSRFToken(),
+            'X-CSRFToken': csrfToken,
           },
           body: JSON.stringify({ email, password }),
           credentials: 'include',
         });
-        console.log("CSRF Token: ", getCSRFToken());
-
-        const data = await response.json();
-
-        if (response.ok && data.success) {
-          this.user = data.user; // Assuming the user data comes back in response
-          this.isAuthenticated = true;
-          this.saveState();
-          // Redirect to home after login
-          window.location.href = "/"; // Replace with the correct Django URL for home
-        } else {
-          this.user = null;
-          this.isAuthenticated = false;
-          this.saveState();
-          throw new Error('Login failed: ' + (data.message || 'Unknown error'));
-        }
+        // rest of the code
       } catch (error) {
         console.error('Login error:', error);
         throw error; // Propagate error to be caught in the Vue component
@@ -59,8 +49,10 @@ export const useAuthStore = defineStore('auth', {
     async register(email, password) {
       try {
         await this.setCsrfToken();
-        const response = await fetch('http://localhost:8000/api/register/', {
+        console.log("CSRF Token: ", getCSRFToken());
+        const response = await fetch('/api/register/', {
           method: 'POST',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': getCSRFToken(),
@@ -84,9 +76,9 @@ export const useAuthStore = defineStore('auth', {
 
     async logout() {
       try {
-        await this.setCsrfToken();
-        const response = await fetch('http://localhost:8000/api/logout/', {
+        const response = await fetch('/api/logout/', {
           method: 'POST',
+          mode: 'cors',
           headers: {
             'X-CSRFToken': getCSRFToken(),
           },
@@ -111,8 +103,9 @@ export const useAuthStore = defineStore('auth', {
     async fetchUser() {
       try {
         await this.setCsrfToken();
-        const response = await fetch('http://localhost:8000/api/user/', {
+        const response = await fetch('/api/user/', {
           credentials: 'include',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': getCSRFToken(),
@@ -158,5 +151,6 @@ export function getCSRFToken() {
             }
         }
     }
+    console.log("CSRF Token: ", cookieValue); // This will log the CSRF token to the console
     return cookieValue;
 }
