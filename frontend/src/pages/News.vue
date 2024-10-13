@@ -1,5 +1,8 @@
 <template>
   <div>
+    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+      Kalendar događanja
+    </h1>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <NewsCard
           v-for="news in newsList"

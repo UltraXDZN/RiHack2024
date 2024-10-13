@@ -11,25 +11,25 @@ export default {
     }
   },
   methods:
-  {
-    async logout() {
-      if (this.authStore) {
-        try {
-          await this.authStore.logout()
-        } catch (error) {
-          console.error(error)
+      {
+        async logout() {
+          if (this.authStore) {
+            try {
+              await this.authStore.logout()
+            } catch (error) {
+              console.error(error)
+            }
+          } else {
+            console.error('Auth store is not initialized')
+          }
+        },
+        async goToLogin() {
+          window.location.href = '/login'
+        },
+        async goToRegister() {
+          window.location.href = '/register'
         }
-      } else {
-        console.error('Auth store is not initialized')
       }
-    },
-    async goToLogin() {
-      window.location.href = '/login'
-    },
-    async goToRegister() {
-      window.location.href = '/register'
-    }
-  }
 }
 </script>
 
@@ -83,18 +83,24 @@ export default {
           <li>
             <a href="/news"
                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-              News</a>
+              Novosti</a>
           </li>
           <li>
-            <a href="#"
+            <a href="/calendar"
                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-              Upcoming Events
+              Nadolazeći događaji
             </a>
           </li>
           <li>
             <a href="#"
                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-              Manage Your Areas
+              Vaša zajednica
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+              eTržnica
             </a>
           </li>
         </ul>

@@ -1,6 +1,9 @@
 <template>
+  <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+    Kalendar događanja
+  </h1>
+  <EventForm/>
   <div>
-    <AddEventButton class="absolute bottom-0 right-0 mb-4 mr-4"/>
 
     <div id="calendar" class="transform w-[420px] h-[570px] mx-auto overflow-hidden">
       <div class="header h-[50px] w-[420px] bg-gray-800 text-center relative z-10">
@@ -49,13 +52,27 @@
           <div :style="arrowStyle"
                class="arrow absolute w-0 h-0 border-solid border-transparent border-b-gray-600"></div>
           <ul class="events">
-            <li v-for="event in selectedDay.events" :key="event.id" class="event">{{ event.label }}</li>
+            <li v-for="event in selectedDay.events" :key="event.id" @click="openEvent(event.id)" class="event">
+              {{ event.label }}
+            </li>
             <li v-if="!selectedDay.events.length" class="event empty">No events</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
+  <EventInfo
+      v-if="selectedEvent"
+      :is-modal-open="isEventModalOpen"
+      :title="selectedEvent.title"
+      :description="selectedEvent.description"
+      :start_time="selectedEvent.start_time"
+      :end_time="selectedEvent.end_time"
+      :location="selectedEvent.location"
+      @close-modal="closeEventModal"
+  />
+
+
 </template>
 
 <script>
@@ -63,9 +80,11 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import AddEventButton from "@/components/CalendarComponents/AddEventButton.vue";
+import EventForm from "@/components/CalendarComponents/EventForm.vue";
+import EventInfo from "@/components/CalendarComponents/EventInfo.vue";
 
 export default {
-  components: {AddEventButton, FontAwesomeIcon},
+  components: {EventForm, EventInfo, AddEventButton, FontAwesomeIcon},
   data() {
     return {
       currentDate: new Date(),
@@ -75,6 +94,9 @@ export default {
       selectedDay: null, // For storing the clicked day
       selectedRow: -1, // For tracking the row of the clicked day
       selectedCol: -1, // For tracking the column of the clicked day
+      selectedEvent: {}, // For storing the clicked event,
+      isEventModalOpen: false,
+
     };
   },
   computed: {
@@ -110,7 +132,7 @@ export default {
     faArrowLeft() {
       return faArrowLeft
     },
-    updateCalendar() {
+    async updateCalendar() {
       const year = this.currentDate.getFullYear();
       const month = this.currentDate.getMonth();
 
@@ -145,7 +167,7 @@ export default {
           number: i,
           isToday: this.isToday(date),
           isOtherMonth: false,
-          events: this.getEvents(date),
+          events: [],
         });
       }
 
@@ -160,7 +182,11 @@ export default {
           events: [],
         });
       }
+
+      // Fetch events after the days are set
+      await this.getEvents();
     },
+
     isToday(date) {
       const today = new Date();
       return (
@@ -169,16 +195,35 @@ export default {
           date.getDate() === today.getDate()
       );
     },
-    getEvents(date) {
-      const eventMap = {
-        '2024-10-02': [{id: 1, color: 'bg-blue-400', label: 'Event 1'}],
-        '2024-10-05': [{id: 2, color: 'bg-green-400', label: 'Event 2'}, {
-          id: 3,
-          color: 'bg-green-400',
-          label: 'Event 3'
-        }],
-      };
-      return eventMap[date.toISOString().split('T')[0]] || [];
+    async getEvents() {
+      try {
+        const response = await fetch('/api/events/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        this.addFetchedEventsToCalendar(data.events);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    },
+
+    addFetchedEventsToCalendar(events) {
+      // Iterate over the events and assign them to the correct days
+      events.forEach((event) => {
+        const eventDate = event.start_time.split('T')[0]; // Extract the date part from the datetime string
+        this.days.forEach((day) => {
+          if (day.date === eventDate) {
+            day.events.push({
+              id: event.id,
+              color: 'bg-blue-400', // You can customize this based on event data
+              label: event.title,
+            });
+          }
+        });
+      });
     },
     selectDay(day, index) {
       if (!day.isOtherMonth) {
@@ -204,6 +249,25 @@ export default {
       this.selectedRow = -1;
       this.selectedCol = -1;
     },
+    async openEvent(eventId) {
+      try {
+        const response = await fetch(`/api/events/${eventId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        this.selectedEvent = data.event; // Adjust based on your API response
+        this.isEventModalOpen = true;
+      } catch (error) {
+        console.error('Error fetching event:', error);
+      }
+    },
+    closeEventModal() {
+      this.isEventModalOpen = false;
+      this.selectedEvent = null;
+    },
   },
 };
 </script>
@@ -219,6 +283,8 @@ export default {
   font-size: 16px;
   line-height: 22px;
   letter-spacing: .5px;
+  min-height: auto;
+  overflow-y: auto;
 }
 
 .event.empty {
