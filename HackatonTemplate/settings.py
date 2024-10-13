@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'news',
     'location',
     'ckeditor',
+    'eTrznica',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

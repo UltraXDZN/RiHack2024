@@ -11,7 +11,7 @@ from .models import NewsFull
 def get_news(request):
     # Fetch all news articles from the database
     news_items = NewsFull.objects.all().values('id', 'title', 'description', 'content', 'author__username', 'banner',
-                                               'created_at')
+                                               'topic', 'created_at')
 
     # Convert the QuerySet to a list of dictionaries and return it as JSON
     return JsonResponse({'news': list(news_items)}, status=200)
@@ -21,7 +21,7 @@ def get_news(request):
 @require_http_methods(['GET'])
 def get_news_detail(request, news_id):
     try:
-        news = NewsFull.objects.values('id', 'title', 'description', 'content', 'author__username', 'banner', 'created_at').get(
+        news = NewsFull.objects.values('id', 'title', 'description', 'content', 'author__username', 'banner', 'topic', 'created_at').get(
             id=news_id)
         return JsonResponse({'news': news}, status=200)
     except NewsFull.DoesNotExist:

@@ -2,9 +2,9 @@
     <div>
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <div class="flex items-center mb-6 text-2xl font-semibold">
-        <img class="w-8 h-8 mr-2 rounded-full" src="https://static-cdn.jtvnw.net/jtv_user_pictures/4b51af1b-ceef-43ce-b954-33a91fd5cbb8-profile_image-70x70.png" alt="logo">
+        <img class="w-8 h-8 mr-2 rounded-full" src="@/assets/logo.png" alt="logo">
         <p class="text-4xl leading-none text-white">
-          FooBar
+          Moj eGrad
         </p>
       </div>
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

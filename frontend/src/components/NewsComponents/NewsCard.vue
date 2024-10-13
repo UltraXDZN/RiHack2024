@@ -26,6 +26,10 @@ export default {
       type: String,
       default: 'Unknown Date',
     },
+    topic: {
+      type: String,
+      default: 'Unknown topic',
+    },
   },
   methods: {
     openArticle() {
@@ -43,16 +47,16 @@ export default {
 </script>
 
 <template>
-  <div @click="openArticle" class="max-w-sm mx-auto bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+  <div @click="openArticle" class="max-w-sm mx-auto bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
     <!-- Image -->
     <img
-        alt="News image"
-        class="w-full h-48 object-cover"
-        :src="image"
+      alt="News image"
+      class="w-full h-48 object-cover"
+      :src="image"
     />
 
     <!-- Content -->
-    <div class="p-4">
+    <div class="p-4 flex-grow">
       <!-- Title -->
       <h2 class="text-white text-lg font-semibold truncate">
         {{ title }} <!-- Bind the title prop -->
@@ -64,17 +68,24 @@ export default {
     </div>
 
     <!-- Footer -->
-    <div class="flex items-center justify-between p-4 bg-gray-900 text-gray-400 text-sm">
+    <div class="flex justify-between p-4 bg-gray-900 text-gray-400 text-sm">
+      <!-- Author Info -->
       <div class="flex items-center">
         <img
-            class="w-8 h-8 rounded-full"
-            src="https://via.placeholder.com/50"
-            alt="Author Avatar"
+          class="w-8 h-8 rounded-full"
+          src="https://via.placeholder.com/50"
+          alt="Author Avatar"
         />
         <div class="ml-2">
           <p>{{ author }} <!-- Bind the author prop --></p>
           <p class="text-xs">{{ date }} <!-- Bind the date prop --></p>
         </div>
+      </div>
+
+      <!-- Topic Info -->
+      <div>
+        <p>Kategorija</p>
+        <b>{{ topic }}</b>
       </div>
     </div>
   </div>

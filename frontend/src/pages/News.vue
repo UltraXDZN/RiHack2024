@@ -2,7 +2,7 @@
 
   <div>
     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-      Kalendar događanja
+      Novosti u vašoj zajednici
     </h1>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <NewsCard
@@ -14,9 +14,11 @@
         :description="news.description"
         :author="news.author__username"
         :date="news.created_at"
+        :topic="news.topic"
       />
 
     </div>
+  </div>
 </template>
 
 <script>
@@ -48,5 +50,6 @@ export default {
       }
 
     },
+  }
 };
 </script>

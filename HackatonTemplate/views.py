@@ -37,7 +37,6 @@ def register_view(request):
     return render(request, "register.html")
 
 
-
 def market_view(request):
     return render(request, "market.html")
 
