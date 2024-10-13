@@ -6,6 +6,8 @@ import Register from '@/pages/Register.vue';
 import Home from '@/pages/Home.vue';
 import News from '@/pages/News.vue';
 import Calendar from '@/pages/Calendar.vue';
+import Market from '@/pages/Market.vue';
+
 
 import NavBar from '@/components/NavBar.vue';
 
@@ -22,6 +24,8 @@ const componentMap = {
     register: Register,
     home: Home,
     news: News,
+    market: Market,
+
     citySelection: CitySelection,
     calendar: Calendar,
     pageArticle: PageArticle
