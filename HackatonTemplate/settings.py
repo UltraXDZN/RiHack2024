@@ -40,14 +40,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "sim",
-    "corsheaders",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'corsheaders',
+    'sim',
+    'news',
+    'ckeditor',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -141,8 +144,10 @@ STATIC_URL = "/static/"
 STATICFILES_BASE_DIR = BASE_DIR / "static"
 STATICFILES_DIRS = [STATICFILES_BASE_DIR]
 
-STATIC_ROOT = BASE_DIR / "local-cdn" / "static"
-MEDIA_URL = "/media/"
+
+STATIC_ROOT = BASE_DIR / 'local-cdn' / 'static'
+MEDIA_URL = '/media/'
+
 MEDIA_ROOT = BASE_DIR / "local-cdn" / "media"
 print(MEDIA_ROOT)
 

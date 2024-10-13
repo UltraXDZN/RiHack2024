@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def home_view(request):
@@ -6,16 +6,22 @@ def home_view(request):
 
 
 def news_view(request):
-    return render(request, "news.html")
+
+if request.user.is_authenticated:
+    return render(request, 'news.html')
+else:
+    return redirect('/login')
+
 
 
 def login_view(request):
     return render(request, "login.html")
 
 
-def register_view(request):
-    return render(request, "register.html")
-
 
 def citySelection_view(request):
     return render(request, "citySelection.html")
+
+def register_view(request):
+    return render(request, 'register.html')
+

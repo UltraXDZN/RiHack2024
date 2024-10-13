@@ -1,10 +1,14 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
+import { createApp, h } from 'vue';
+import { createPinia } from 'pinia';
 
-import Login from "@/pages/Login.vue";
-import Register from "@/pages/Register.vue";
-import Home from "@/pages/Home.vue";
-import News from "@/pages/News.vue";
+import Login from '@/pages/Login.vue';
+import Register from '@/pages/Register.vue';
+import Home from '@/pages/Home.vue';
+import News from '@/pages/News.vue';
+import NavBar from '@/components/NavBar.vue';
+
+import './style.css';
+import './tailwindSetup.css';
 
 import "./style.css";
 import "./tailwindSetup.css";
@@ -27,7 +31,12 @@ if (element) {
     const appComponent = componentMap[page];
 
     if (appComponent) {
-        const app = createApp(appComponent);
+        const app = createApp({
+            render: () => h('div', [
+                h(NavBar),
+                h(appComponent)
+            ])
+        });
         const pinia = createPinia();
 
         app.use(pinia);
