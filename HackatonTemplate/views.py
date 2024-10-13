@@ -18,3 +18,6 @@ def register_view(request):
 
 def citySelection_view(request):
     return render(request, "calendar.html")
+
+def citySelection_view(request):
+    return render(request, "market.html")

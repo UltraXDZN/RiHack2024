@@ -6,6 +6,7 @@ import Register from '@/pages/Register.vue';
 import Home from '@/pages/Home.vue';
 import News from '@/pages/News.vue';
 import Calendar from '@/pages/Calendar.vue';
+import Market from '@/pages/Market.vue';
 import './style.css';
 import './tailwindSetup.css';
 
@@ -16,6 +17,7 @@ const componentMap = {
     home: Home,
     news: News,
     calendar: Calendar,
+    market: Market,
 };
 
 const element = document.getElementById('app');

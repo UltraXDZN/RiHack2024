@@ -24,11 +24,12 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_view, name='home'),
+    path('home/', views.home_view, name='home'),
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('news/', views.news_view, name='news'),
-    path("calendar", views.citySelection_view, name="calendar"),
+    path("calendar/", views.citySelection_view, name="calendar"),
+    path("market/", views.citySelection_view, name="market"),
     path('', include('sim.urls')) # API calls
 ]
 
