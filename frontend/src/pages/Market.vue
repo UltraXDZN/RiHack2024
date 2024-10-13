@@ -128,6 +128,7 @@ export default {
         formData.append('title', this.newPost.title);
         formData.append('businessName', this.newPost.businessName);
         formData.append('content', this.newPost.content);
+        formData.append('city', this.newPost.city);
         if (this.newPost.image) {
           formData.append('image', this.newPost.image);
         }
@@ -163,6 +164,7 @@ export default {
         formData.append('title', this.newPost.title);
         formData.append('businessName', this.newPost.businessName);
         formData.append('content', this.newPost.content);
+        formData.append('city', this.newPost.city);
         if (this.newPost.image) {
           formData.append('image', this.newPost.image);
         }

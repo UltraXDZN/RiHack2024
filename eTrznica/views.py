@@ -31,6 +31,7 @@ def create_post(request):
         content = request.POST.get('content')
         image = request.FILES.get('image')
         city = request.POST.get('city')
+        print(request.POST)
 
         if not all([title, business_name, content]):
             return JsonResponse({'error': 'Missing fields'}, status=400)
