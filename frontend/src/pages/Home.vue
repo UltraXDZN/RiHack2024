@@ -79,8 +79,6 @@ export default {
               </a>
             </div>
           </div>
-
-
       </div>
   </section>
 </template>
