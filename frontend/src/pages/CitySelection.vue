@@ -800,7 +800,12 @@ export default {
             );
             if (this.focusCounty === county) {
                 element.classList.remove("focus-county");
-                //this.focusCounty = null; //when uncommented removes all selections
+                this.focusCounty = null; //when uncommented removes all selected cities when focus country is right clicked, when some other country is right clicked nothing is changed
+                const elements = document.querySelectorAll(".active-county");
+                elements.forEach((element) => {
+                    element.classList.remove("active-county");
+                });
+                this.activeCounties = [];
             }
         },
     },
