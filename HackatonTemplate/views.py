@@ -7,10 +7,10 @@ def home_view(request):
 
 def news_view(request):
 
-if request.user.is_authenticated:
-    return render(request, 'news.html')
-else:
-    return redirect('/login')
+    if request.user.is_authenticated:
+        return render(request, 'news.html')
+    else:
+        return redirect('/login')
 
 
 

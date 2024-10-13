@@ -20,6 +20,7 @@ urlpatterns = [
     path('', include('news.urls')),
     path('', include('sim.urls')),
     path('', include('calendarEvents.urls')),
+    path('', include('location.urls')),
 ]
 
 if settings.DEBUG:
