@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
       Kalendar događanja
@@ -14,14 +15,15 @@
         :author="news.author__username"
         :date="news.created_at"
       />
+
     </div>
-  </div>
 </template>
 
 <script>
 import NewsCard from "@/components/NewsComponents/NewsCard.vue";
 
 export default {
+
   name: "News",
   components: { NewsCard },
   data() {
@@ -44,7 +46,7 @@ export default {
       } catch (error) {
         console.error('Error loading news:', error);
       }
+
     },
-  },
 };
 </script>

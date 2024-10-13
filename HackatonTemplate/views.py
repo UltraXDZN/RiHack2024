@@ -9,10 +9,9 @@ def home_view(request):
 
 def news_view(request):
     if request.user.is_authenticated:
-        return render(request, 'news.html')
+        return render(request, "news.html")
     else:
-        return redirect('/login')
-
+        return redirect("/login")
 
 def news_detail(request, id):
     article = get_object_or_404(NewsFull, id=id)
@@ -21,9 +20,9 @@ def news_detail(request, id):
 
 def calendar_view(request):
     if request.user.is_authenticated:
-        return render(request, 'calendar.html')
+        return render(request, "calendar.html")
     else:
-        return redirect('/login')
+        return redirect("/login")
 
 
 def login_view(request):
@@ -35,8 +34,14 @@ def citySelection_view(request):
 
 
 def register_view(request):
-    return render(request, 'register.html')
+    return render(request, "register.html")
 
 
-def citySelection_view(request):
+
+def market_view(request):
     return render(request, "market.html")
+
+
+def profile_view(request):
+    return render(request, "profile.html")
+
