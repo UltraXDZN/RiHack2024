@@ -5,13 +5,14 @@
     </h1>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <NewsCard
-          v-for="news in newsList"
-          :key="news.id"
-          :title="news.title"
-          :image="'/media/' + news.banner"
-          :description="news.description"
-          :author="news.author__username"
-          :date="news.created_at"
+        v-for="news in newsList"
+        :key="news.id"
+        :id="news.id"
+        :title="news.title"
+        :image="'/media/' + news.banner"
+        :description="news.description"
+        :author="news.author__username"
+        :date="news.created_at"
       />
     </div>
   </div>
@@ -22,7 +23,7 @@ import NewsCard from "@/components/NewsComponents/NewsCard.vue";
 
 export default {
   name: "News",
-  components: {NewsCard},
+  components: { NewsCard },
   data() {
     return {
       newsList: [], // Array of news articles
@@ -39,10 +40,7 @@ export default {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
-        console.log("data.news", data.news);
-        this.newsList = data.news; // Make sure the API response includes the necessary fields
-        console.log("this.newsList", this.newsList)
+        this.newsList = data.news; // Assuming the API response includes the news array
       } catch (error) {
         console.error('Error loading news:', error);
       }

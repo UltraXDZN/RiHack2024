@@ -2,6 +2,10 @@
 export default {
   name: "NewsCard",
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -23,16 +27,28 @@ export default {
       default: 'Unknown Date',
     },
   },
+  methods: {
+    openArticle() {
+      // Redirect to the Django URL for the article page
+      window.location.href = `/news/${this.id}/`; // Assuming /news/<id>/ is the Django URL for the article
+    },
+  },
+  computed: {
+    formattedDate() {
+      const options = {year: 'numeric', month: 'long', day: 'numeric'};
+      return new Date(this.date).toLocaleDateString(undefined, options);
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="max-w-sm mx-auto bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+  <div @click="openArticle" class="max-w-sm mx-auto bg-gray-800 rounded-lg shadow-lg overflow-hidden">
     <!-- Image -->
     <img
-      alt="News image"
-      class="w-full h-48 object-cover"
-      :src="image"
+        alt="News image"
+        class="w-full h-48 object-cover"
+        :src="image"
     />
 
     <!-- Content -->
@@ -51,9 +67,9 @@ export default {
     <div class="flex items-center justify-between p-4 bg-gray-900 text-gray-400 text-sm">
       <div class="flex items-center">
         <img
-          class="w-8 h-8 rounded-full"
-          src="https://via.placeholder.com/50"
-          alt="Author Avatar"
+            class="w-8 h-8 rounded-full"
+            src="https://via.placeholder.com/50"
+            alt="Author Avatar"
         />
         <div class="ml-2">
           <p>{{ author }} <!-- Bind the author prop --></p>

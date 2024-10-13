@@ -17,6 +17,7 @@ import './tailwindSetup.css';
 import "./style.css";
 import "./tailwindSetup.css";
 import CitySelection from "@/pages/CitySelection.vue";
+import PageArticle from "@/pages/PageArticle.vue";
 
 const componentMap = {
     login: Login,
@@ -26,7 +27,8 @@ const componentMap = {
     market: Market,
 
     citySelection: CitySelection,
-    calendar: Calendar
+    calendar: Calendar,
+    pageArticle: PageArticle
 };
 
 const element = document.getElementById("app");
