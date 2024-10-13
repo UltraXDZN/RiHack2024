@@ -1,45 +1,52 @@
-<script>
-export default {
-  name: "News"
-}
-</script>
-
 <template>
-  <div class="max-w-sm mx-auto bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-    <!-- Image -->
-    <img
-      class="w-full h-48 object-cover"
-      src="https://via.placeholder.com/300x200"
-      alt="Boxing image"
-    />
-
-    <!-- Content -->
-    <div class="p-4">
-      <!-- Title -->
-      <h2 class="text-white text-lg font-semibold truncate">
-        The Sweet Science Unveiled: A Ringside Journey
-      </h2>
-      <!-- Subtitle -->
-      <p class="text-gray-400 mt-2 text-sm">
-        Step Into The Boxing Ring: Stories, Strategies, And The Unyielding Spirit Of Champions
-      </p>
-    </div>
-
-    <!-- Footer -->
-    <div class="flex items-center justify-between p-4 bg-gray-900 text-gray-400 text-sm">
-      <div class="flex items-center">
-        <img
-          class="w-8 h-8 rounded-full"
-          src="https://via.placeholder.com/50"
-          alt="Author Avatar"
-        />
-        <div class="ml-2">
-          <p>James</p>
-          <p class="text-xs">August 18, 2023</p>
-        </div>
-      </div>
+  <div>
+    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+      Kalendar događanja
+    </h1>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <NewsCard
+          v-for="news in newsList"
+          :key="news.id"
+          :title="news.title"
+          :image="'/media/' + news.banner"
+          :description="news.description"
+          :author="news.author__username"
+          :date="news.created_at"
+      />
     </div>
   </div>
 </template>
 
+<script>
+import NewsCard from "@/components/NewsComponents/NewsCard.vue";
 
+export default {
+  name: "News",
+  components: {NewsCard},
+  data() {
+    return {
+      newsList: [], // Array of news articles
+    };
+  },
+  created() {
+    this.loadNews();
+  },
+  methods: {
+    async loadNews() {
+      try {
+        const response = await fetch('/api/news/');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        console.log("data.news", data.news);
+        this.newsList = data.news; // Make sure the API response includes the necessary fields
+        console.log("this.newsList", this.newsList)
+      } catch (error) {
+        console.error('Error loading news:', error);
+      }
+    },
+  },
+};
+</script>
