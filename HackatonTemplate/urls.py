@@ -6,13 +6,15 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
 
+
+    path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('news/', views.news_view, name='news'),
     path('calendar/', views.calendar_view, name='calendar'),
+    path("citySelection", views.citySelection_view, name="citySelection"),
 
     # API calls
     path('', include('news.urls')),

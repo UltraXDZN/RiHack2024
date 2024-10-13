@@ -2,14 +2,16 @@ from django.shortcuts import render, redirect
 
 
 def home_view(request):
-    return render(request, 'home.html')
+    return render(request, "home.html")
 
 
 def news_view(request):
-    if request.user.is_authenticated:
-        return render(request, 'news.html')
-    else:
-        return redirect('/login')
+
+if request.user.is_authenticated:
+    return render(request, 'news.html')
+else:
+    return redirect('/login')
+
 
 
 def calendar_view(request):
@@ -20,8 +22,13 @@ def calendar_view(request):
 
 
 def login_view(request):
-    return render(request, 'login.html')
+    return render(request, "login.html")
 
+
+
+def citySelection_view(request):
+    return render(request, "citySelection.html")
 
 def register_view(request):
     return render(request, 'register.html')
+
