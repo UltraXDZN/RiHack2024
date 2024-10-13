@@ -42,6 +42,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'corsheaders',
     'sim',
+    'calendarEvents',
     'news',
     'ckeditor',
     'django.contrib.admin',

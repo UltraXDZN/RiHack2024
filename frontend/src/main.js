@@ -5,6 +5,8 @@ import Login from '@/pages/Login.vue';
 import Register from '@/pages/Register.vue';
 import Home from '@/pages/Home.vue';
 import News from '@/pages/News.vue';
+import Calendar from '@/pages/Calendar.vue';
+
 import NavBar from '@/components/NavBar.vue';
 
 import './style.css';
@@ -20,6 +22,7 @@ const componentMap = {
     home: Home,
     news: News,
     citySelection: CitySelection,
+    calendar: Calendar
 };
 
 const element = document.getElementById("app");

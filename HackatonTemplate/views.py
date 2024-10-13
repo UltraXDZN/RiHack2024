@@ -14,6 +14,13 @@ else:
 
 
 
+def calendar_view(request):
+    if request.user.is_authenticated:
+        return render(request, 'calendar.html')
+    else:
+        return redirect('/login')
+
+
 def login_view(request):
     return render(request, "login.html")
 
